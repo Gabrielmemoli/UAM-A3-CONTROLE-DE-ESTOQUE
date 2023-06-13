@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Veículo</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Cadastro de Veículos</h1>
+        <p class="mb-4">Complete as informações do veículo</p>
+        <a class="btn btn-outline-danger" href="/portfolio">Voltar</a>
+        <br>
+        <br>
+
+        <form id="cadastroForm" method="POST" action="/cadastro_carros">
+            <div class="form-group">
+                <label for="placa">Placa:</label>
+                <input type="text" class="form-control" id="placa" name="placa" required>
+            </div>
+
+            <div class="form-group">
+                <label for="modelo">Modelo:</label>
+                <input type="text" class="form-control" id="modelo" name="modelo" required>
+            </div>
+
+            <div class="form-group">
+                <label for="chassi">Chassi:</label>
+                <input type="text" class="form-control" id="chassi" name="chassi" required>
+            </div>
+
+            <div class="form-group">
+                <label for="ano">Ano:</label>
+                <input type="text" class="form-control" id="ano" name="ano" required>
+            </div>
+
+            <div class="form-group">
+                <label for="cor">Cor:</label>
+                <input type="text" class="form-control" id="cor" name="cor" required>
+            </div>
+
+            <div class="form-group">
+                <label for="km">KM:</label>
+                <input type="text" class="form-control" id="km" name="km" required>
+            </div>
+
+            <div class="form-group">
+                <label for="preco">Preço:</label>
+                <input type="text" class="form-control" id="preco" name="preco" required>
+            </div>
+
+            <div class="form-group">
+                <label for="marca">Marca:</label>
+                <select class="form-control" id="marca" name="marca">
+                    <option value="Volkswagen">Volkswagen</option>
+                    <option value="Ford">Ford</option>
+                    <option value="Chevrolet">Chevrolet</option>
+                    <option value="Nissan">Nissan</option>
+                    <option value="Kia">Kia</option>
+                    <option value="Peugeot">Peugeot</option>
+                    <option value="Hyundai">Hyundai</option>
+                    <option value="Citroën">Citroën</option>
+                    <option value="Honda">Honda</option>
+                    <option value="Jeep">Jeep</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="categoria">Categoria:</label>
+                <select class="form-control" id="categoria" name="categoria">
+                    <option value="Sedã">Sedã</option>
+                    <option value="Hatch">Hatch</option>
+                    <option value="Picape">Picape</option>
+                    <option value="SUV">SUV</option>
+                    <option value="Van">Van</option>
+                    <option value="Jipe">Jipe</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="status">Status:</label><br>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="statusDisponivel" name="status" class="custom-control-input" value="Disponível" checked>
+                    <label class="custom-control-label" for="statusDisponivel">Disponível</label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="statusAlugado" name="status" class="custom-control-input" value="Alugado">
+                    <label class="custom-control-label" for="statusAlugado">Alugado</label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="statusManutencao" name="status" class="custom-control-input" value="Manutenção">
+                    <label class="custom-control-label" for="statusManutencao">Manutenção</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="imagem">Imagem:</label>
+                <input type="file" class="form-control-file" id="imagem" name="imagem">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Concluir</button>
+        </form>
+        <hr>
+        <footer class="py-4 bg-dark text-white">
+            <div class="container text-center">
+              <p class="mb-0">Estoque de Carros &copy; 2023. Universidade Anhembi Morumbi.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
