@@ -26,7 +26,7 @@
 
   <div class="container">
     <h1 class="my-4">Editar Carro</h1>
-    <form action="/edit_carro/{{ veiculo[0] }}" method="POST, GET">
+    <form action="/edit_carro/{{ veiculo[0] }}" method="POST">
       <div class="form-group">
         <label for="modelo">Placa</label>
         <input type="text" class="form-control" id="placa" name="placa" value="{{ veiculo[0] }}" required>
