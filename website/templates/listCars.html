@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Carros</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Lista de Carros</h1>
+
+        <table class="table mt-4">
+            <thead>
+                <tr>
+                    <th>Placa</th>
+                    <th>Modelo</th>
+                    <th>Cor</th>
+                    <th>Km</th>
+                    <th>Preço</th>
+                    <th>Marca</th>
+                    <th>Categoria</th> 
+                    <th>Status</th>
+                    <th>Imagem</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for carro in carros %}
+                <tr>
+                    <td>{{ carro[0] }}</td>
+                    <td>{{ carro[1] }}</td>
+                    <td>{{ carro[2] }}</td>
+                    <td>{{ carro[3] }}</td>
+                    <td>{{ carro[4] }}</td>
+                    <td>{{ carro[5] }}</td>
+                    <td>{{ carro[6] }}</td>
+                    <td>{{ carro[7] }}</td>
+                    # mostrar imagem do carro
+                    <td><img src="{{ url_for('static', filename='imagem/' + carro[8]) }}" width="100px" height="100px"></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

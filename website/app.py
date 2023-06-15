@@ -19,7 +19,8 @@ def create_table():
         preco REAL,
         marca TEXT,
         categoria TEXT,
-        status TEXT
+        status TEXT,
+        imagem BLOB
     )
     ''')
 
@@ -49,13 +50,14 @@ def cadastro_carros():
         marca = request.form['marca']
         categoria = request.form['categoria']
         status = request.form['status']
+        imagem = request.form['imagem']
 
 
         # Salvar os dados no banco de dados
         conn = sqlite3.connect('banco.db')
         cursor = conn.cursor()
-        cursor.execute("INSERT INTO veiculos (placa, modelo, chassi, ano, cor, km, preco, marca, categoria, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                       (placa, modelo, chassi, ano, cor, km, preco, marca, categoria, status))
+        cursor.execute("INSERT INTO veiculos (placa, modelo, chassi, ano, cor, km, preco, marca, categoria, status, imagem) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                       (placa, modelo, chassi, ano, cor, km, preco, marca, categoria, status, imagem))
         conn.commit()
         conn.close()
 
@@ -65,6 +67,21 @@ def cadastro_carros():
     # Lógica para exibir o formulário de cadastro de veículo
     return render_template('cadastro_carros.html')
 
+@app.route('/listCars')
+def listCars():
+    # Conectar ao banco de dados
+    conn = sqlite3.connect('banco.db')
+    cursor = conn.cursor()
+
+    # Recuperar os carros do banco de dados
+    cursor.execute('SELECT placa, modelo, cor, km, preco, marca, categoria, status, imagem FROM veiculos')
+    carros = cursor.fetchall()
+
+    # Fechar a conexão com o banco de dados
+    conn.close()
+
+    # Renderizar o template HTML e passar os dados dos carros
+    return render_template('listCars.html', carros=carros)
 
 # Página inicial com formulário de login
 @app.route('/', methods=['GET', 'POST'])
