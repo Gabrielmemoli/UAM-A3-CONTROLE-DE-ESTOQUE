@@ -96,24 +96,28 @@ def excluir_carro(placa):
     # Redirecionar para a página principal após a exclusão
     return redirect('/portfolio')
 
-@app.route('/edit_carro/<placa>', methods=['GET', 'POST'])
+@app.route('/edit_carro/<placa>', methods=['PUT'])
 def edit_carro(placa):
     conn = sqlite3.connect('banco.db')
     cursor = conn.cursor()
 
     if request.method == 'POST':
         # Obter os novos valores dos campos do formulário de edição
+        placa = request.form['placa']
         modelo = request.form['modelo']
+        chassi = request.form['chassi']
+        ano = request.form['ano']
         cor = request.form['cor']
         km = request.form['km']
         preco = request.form['preco']
         marca = request.form['marca']
         categoria = request.form['categoria']
         status = request.form['status']
+        imagem = request.form['imagem']
 
         # Executar a query SQL para atualizar as informações do veículo
-        cursor.execute("UPDATE veiculos SET modelo = ?, cor = ?, km = ?, preco = ?, marca = ?, categoria = ?, status = ? WHERE placa = ?",
-                       (modelo, cor, km, preco, marca, categoria, status, placa))
+        cursor.execute("UPDATE INTO veiculos (placa, modelo, chassi, ano, cor, km, preco, marca, categoria, status, imagem) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                       (placa, modelo, chassi, ano, cor, km, preco, marca, categoria, status, imagem))
         conn.commit()
 
         # Redirecionar para a página de portfólio após a edição
@@ -144,31 +148,35 @@ def cadastro_carros():
         status = request.form['status']
         imagem = request.form['imagem']
 
+
         # Salvar os dados no banco de dados
         conn = sqlite3.connect('banco.db')
         cursor = conn.cursor()
-        cursor.execute('INSERT INTO veiculos VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+        cursor.execute("INSERT INTO veiculos (placa, modelo, chassi, ano, cor, km, preco, marca, categoria, status, imagem) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                        (placa, modelo, chassi, ano, cor, km, preco, marca, categoria, status, imagem))
         conn.commit()
         conn.close()
 
-        # Redirecionar para a página de portfólio após o cadastro
-        return redirect('/portfolio')
+        # Redirecionar para uma página de sucesso ou exibir uma mensagem
+        return 'Veículo cadastrado com sucesso!'
 
-    else:
-        return render_template('cadastro_carros.html')
-
+    # Lógica para exibir o formulário de cadastro de veículo
+    return render_template('cadastro_carros.html')
 
 @app.route('/portfolio')
-def portfolio():
+def listCars():
+    # Conectar ao banco de dados
     conn = sqlite3.connect('banco.db')
     cursor = conn.cursor()
 
-    # Selecionar todos os veículos do banco de dados
-    cursor.execute('SELECT * FROM veiculos')
+    # Recuperar os carros do banco de dados
+    cursor.execute('SELECT placa, modelo, cor, km, preco, marca, categoria, status, imagem FROM veiculos')
     veiculos = cursor.fetchall()
 
-    # Renderizar a página de portfólio com a lista de veículos
+    # Fechar a conexão com o banco de dados
+    conn.close()
+
+    # Renderizar o template HTML e passar os dados dos carros
     return render_template('portfolio.html', veiculos=veiculos)
 
 if __name__ == '__main__':
