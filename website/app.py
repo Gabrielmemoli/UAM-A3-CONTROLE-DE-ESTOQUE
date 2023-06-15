@@ -125,6 +125,9 @@ def portfolio():
     # Renderizar a página de portfólio com a lista de veículos
     return render_template('portfolio.html', veiculos=veiculos)
 
+@app.route('/')
+def login():
+    return render_template('login.html')
 
 if __name__ == '__main__':
     create_table()
