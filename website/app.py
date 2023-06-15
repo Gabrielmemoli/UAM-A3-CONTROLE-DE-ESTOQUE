@@ -50,24 +50,28 @@ def excluir_carro(placa):
     # Redirecionar para a página principal após a exclusão
     return redirect('/portfolio')
 
-@app.route('/edit_carro/<placa>', methods=['GET', 'POST'])
+@app.route('/edit_carro/<placa>', methods=['PUT'])
 def edit_carro(placa):
     conn = sqlite3.connect('banco.db')
     cursor = conn.cursor()
 
     if request.method == 'POST':
         # Obter os novos valores dos campos do formulário de edição
+        placa = request.form['placa']
         modelo = request.form['modelo']
+        chassi = request.form['chassi']
+        ano = request.form['ano']
         cor = request.form['cor']
         km = request.form['km']
         preco = request.form['preco']
         marca = request.form['marca']
         categoria = request.form['categoria']
         status = request.form['status']
+        imagem = request.form['imagem']
 
         # Executar a query SQL para atualizar as informações do veículo
-        cursor.execute('UPDATE veiculos SET modelo = ?, cor = ?, km = ?, preco = ?, marca = ?, categoria = ?, status = ? WHERE placa = ?',
-                       (modelo, cor, km, preco, marca, categoria, status, placa))
+        cursor.execute("UPDATE INTO veiculos (placa, modelo, chassi, ano, cor, km, preco, marca, categoria, status, imagem) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                       (placa, modelo, chassi, ano, cor, km, preco, marca, categoria, status, imagem))
         conn.commit()
 
         # Redirecionar para a página de portfólio após a edição

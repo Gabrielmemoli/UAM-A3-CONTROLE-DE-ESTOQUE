@@ -41,7 +41,7 @@
                     <p class="card-text">Marca: {{ veiculo[5] }}</p>
                     <p class="card-text">Categoria: {{ veiculo[6] }}</p>
                     <p class="card-text">Status: {{ veiculo[7] }}</p>
-                    <form action="/edit_carro/{{ veiculo[0] }}" method="POST">
+                    <form action="/edit_carro/{{ veiculo[0] }}" method="GET">
                       <button type="submit" class="btn btn-primary">Alterar</button>
                     </form>
                     <form action="/portfolio/{{ veiculo[0] }}" method="POST">
