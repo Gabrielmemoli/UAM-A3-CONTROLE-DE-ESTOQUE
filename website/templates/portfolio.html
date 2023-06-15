@@ -17,9 +17,6 @@
         <li class="nav-item">
           <a class="nav-link" href="/cadastro_carros">Cadastro de Veículos</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/listCars">Listar Carros</a>
-        </li>
       </ul>
     </div>
   </nav>
@@ -30,21 +27,32 @@
       <p class="lead">Inventário e grupo de modelos da locadora.</p>
     </div>
   </header>
+          <div class="container">
+    
+            {% for veiculo in veiculos %}
+            <div class="card mt-4">
+                <div class="card-body">
+                    <img src="{{ veiculo[8] }}" alt="Imagem do veículo" class="img-fluid">
+                    <h5 class="card-title">Placa: {{ veiculo[0] }}</h5>
+                    <p class="card-text">Modelo: {{ veiculo[1] }}</p>
+                    <p class="card-text">Cor: {{ veiculo[2] }}</p>
+                    <p class="card-text">KM: {{ veiculo[3] }}</p>
+                    <p class="card-text">Preço: {{ veiculo[4] }}</p>
+                    <p class="card-text">Marca: {{ veiculo[5] }}</p>
+                    <p class="card-text">Categoria: {{ veiculo[6] }}</p>
+                    <p class="card-text">Status: {{ veiculo[7] }}</p>
+                    <form action="/edit_carro/{{ veiculo[0] }}" method="POST">
+                      <button type="submit" class="btn btn-primary">Alterar</button>
+                    </form>
+                    <form action="/portfolio/{{ veiculo[0] }}" method="POST">
+                      <button type="submit" class="btn btn-danger">Excluir</button>
+                  </form>
 
-  <section id="cars" class="py-5">
-    <div class="container">
-      <h2 class="text-center mb-4">Grupo de Carros</h2>
-      <div class="row">
-        <div class="col-lg-4 col-md-6 mb-4">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Grupo A - Compacto</h5>
-              <p class="card-text">Fiat Uno 1.0 ou similar.</p>
-              <a href="#" class="btn btn-primary">Alterar</a>
-              <a href="#" class="btn btn-primary">Excluir</a>
+
+                </div>
             </div>
-          </div>
-          
+            {% endfor %}
+        </div>
 
       </div>
     </div>

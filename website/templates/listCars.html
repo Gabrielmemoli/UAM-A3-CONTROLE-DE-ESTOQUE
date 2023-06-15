@@ -3,44 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Carros</title>
+    <title>Lista de Veículos</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
     <div class="container">
-        <h1 class="mt-5">Lista de Carros</h1>
+        <h1 class="mt-5">Lista de Veículos</h1>
 
-        <table class="table mt-4">
-            <thead>
-                <tr>
-                    <th>Placa</th>
-                    <th>Modelo</th>
-                    <th>Cor</th>
-                    <th>Km</th>
-                    <th>Preço</th>
-                    <th>Marca</th>
-                    <th>Categoria</th> 
-                    <th>Status</th>
-                    <th>Imagem</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for carro in carros %}
-                <tr>
-                    <td>{{ carro[0] }}</td>
-                    <td>{{ carro[1] }}</td>
-                    <td>{{ carro[2] }}</td>
-                    <td>{{ carro[3] }}</td>
-                    <td>{{ carro[4] }}</td>
-                    <td>{{ carro[5] }}</td>
-                    <td>{{ carro[6] }}</td>
-                    <td>{{ carro[7] }}</td>
-                    # mostrar imagem do carro
-                    <td><img src="{{ url_for('static', filename='imagem/' + carro[8]) }}" width="100px" height="100px"></td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        {% for veiculo in veiculos %}
+        <div class="card mt-4">
+            <div class="card-body">
+                <h5 class="card-title">Placa: {{ veiculo[0] }}</h5>
+                <p class="card-text">Modelo: {{ veiculo[1] }}</p>
+                <p class="card-text">Cor: {{ veiculo[2] }}</p>
+                <p class="card-text">KM: {{ veiculo[3] }}</p>
+                <p class="card-text">Preço: {{ veiculo[4] }}</p>
+                <p class="card-text">Marca: {{ veiculo[5] }}</p>
+                <p class="card-text">Categoria: {{ veiculo[6] }}</p>
+                <p class="card-text">Status: {{ veiculo[7] }}</p>
+                <img src="{{ veiculo[8] }}" alt="Imagem do veículo" class="img-fluid">
+            </div>
+        </div>
+        {% endfor %}
     </div>
 
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Editar Carro</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Estoque Veículos</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/cadastro_carros">Cadastro de Veículos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/portfolio">Voltar para o Portfólio</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h1 class="my-4">Editar Carro</h1>
+    <form action="/edit_carro/{{ veiculo[0] }}" method="POST">
+      <div class="form-group">
+        <label for="modelo">Modelo</label>
+        <input type="text" class="form-control" id="modelo" name="modelo" value="{{ veiculo[1] }}" required>
+      </div>
+      <div class="form-group">
+        <label for="cor">Cor</label>
+        <input type="text" class="form-control" id="cor" name="cor" value="{{ veiculo[2] }}" required>
+      </div>
+      <div class="form-group">
+        <label for="km">KM</label>
+        <input type="number" class="form-control" id="km" name="km" value="{{ veiculo[3] }}" required>
+      </div>
+      <div class="form-group">
+        <label for="preco">Preço</label>
+        <input type="number" class="form-control" id="preco" name="preco" value="{{ veiculo[4] }}" required>
+      </div>
+      <div class="form-group">
+        <label for="marca">Marca</label>
+        <input type="text" class="form-control" id="marca" name="marca" value="{{ veiculo[5] }}" required>
+      </div>
+      <div class="form-group">
+        <label for="categoria">Categoria</label>
+        <input type="text" class="form-control" id="categoria" name="categoria" value="{{ veiculo[6] }}" required>
+      </div>
+      <div class="form-group">
+        <label for="status">Status</label>
+        <input type="text" class="form-control" id="status" name="status" value="{{ veiculo[7] }}" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+    </form>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</body>
+</html>

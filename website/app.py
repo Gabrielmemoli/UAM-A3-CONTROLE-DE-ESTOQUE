@@ -35,6 +35,52 @@ def create_table():
     conn.commit()
     conn.close()
 
+@app.route('/portfolio/<placa>', methods=['POST'])
+def excluir_carro(placa):
+    conn = sqlite3.connect('banco.db')
+    cursor = conn.cursor()
+
+    # Executa a query SQL para excluir o carro com a placa fornecida
+    cursor.execute('DELETE FROM veiculos WHERE placa = ?', (placa,))
+    conn.commit()
+
+    # Fecha a conexão com o banco de dados
+    conn.close()
+
+    # Redirecionar para a página principal após a exclusão
+    return redirect('/portfolio')
+
+@app.route('/edit_carro/<placa>', methods=['GET', 'POST'])
+def edit_carro(placa):
+    conn = sqlite3.connect('banco.db')
+    cursor = conn.cursor()
+
+    if request.method == 'POST':
+        # Obter os novos valores dos campos do formulário de edição
+        modelo = request.form['modelo']
+        cor = request.form['cor']
+        km = request.form['km']
+        preco = request.form['preco']
+        marca = request.form['marca']
+        categoria = request.form['categoria']
+        status = request.form['status']
+
+        # Executar a query SQL para atualizar as informações do veículo
+        cursor.execute('UPDATE veiculos SET modelo = ?, cor = ?, km = ?, preco = ?, marca = ?, categoria = ?, status = ? WHERE placa = ?',
+                       (modelo, cor, km, preco, marca, categoria, status, placa))
+        conn.commit()
+
+        # Redirecionar para a página de portfólio após a edição
+        return redirect('/portfolio')
+
+    else:
+        # Obter as informações do veículo com base na placa fornecida
+        cursor.execute('SELECT * FROM veiculos WHERE placa = ?', (placa,))
+        veiculo = cursor.fetchone()
+
+        # Renderizar a página de edição de carro com as informações do veículo
+        return render_template('edit_carro.html', veiculo=veiculo)
+
 
 @app.route('/cadastro_carros', methods=['GET', 'POST'])
 def cadastro_carros():
@@ -67,7 +113,7 @@ def cadastro_carros():
     # Lógica para exibir o formulário de cadastro de veículo
     return render_template('cadastro_carros.html')
 
-@app.route('/listCars')
+@app.route('/portfolio')
 def listCars():
     # Conectar ao banco de dados
     conn = sqlite3.connect('banco.db')
@@ -75,13 +121,13 @@ def listCars():
 
     # Recuperar os carros do banco de dados
     cursor.execute('SELECT placa, modelo, cor, km, preco, marca, categoria, status, imagem FROM veiculos')
-    carros = cursor.fetchall()
+    veiculos = cursor.fetchall()
 
     # Fechar a conexão com o banco de dados
     conn.close()
 
     # Renderizar o template HTML e passar os dados dos carros
-    return render_template('listCars.html', carros=carros)
+    return render_template('portfolio.html', veiculos=veiculos)
 
 # Página inicial com formulário de login
 @app.route('/', methods=['GET', 'POST'])
