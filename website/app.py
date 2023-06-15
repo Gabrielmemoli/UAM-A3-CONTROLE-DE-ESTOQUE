@@ -35,6 +35,52 @@ def create_table():
     conn.commit()
     conn.close()
 
+    # Página inicial com formulário de login
+@app.route('/', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        conn = sqlite3.connect('banco.db')
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM users WHERE username=? AND password=?", (username, password))
+        user = cursor.fetchone()
+        conn.close()
+        if user:
+            return redirect('/portfolio')  # Redireciona para a página "portfolio.html"
+        else:
+            return render_template('login.html', error=True)
+    return render_template('login.html', error=False)
+
+# Página de cadastro de usuário
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        # Obter os dados do formulário
+        username = request.form['username']
+        password = request.form['password']
+
+        # Salvar os dados no banco de dados
+        conn = sqlite3.connect('banco.db')
+        cursor = conn.cursor()
+        cursor.execute("INSERT INTO users (username, password) VALUES (?, ?)", (username, password))
+        conn.commit()
+        conn.close()
+        return redirect('/')
+    return render_template('register.html')
+
+
+
+# Página "portfolio" após o login
+@app.route('/portfolio')
+def exibir_portfolio():
+    return render_template('portfolio.html')
+
+# Rota para a página de cadastro de carros
+#@app.route('/cadastro_carros')
+#def cadastro_carros():
+#    return render_template('cadastro_carros.html')
+
 @app.route('/portfolio/<placa>', methods=['POST'])
 def excluir_carro(placa):
     conn = sqlite3.connect('banco.db')
@@ -124,10 +170,6 @@ def portfolio():
 
     # Renderizar a página de portfólio com a lista de veículos
     return render_template('portfolio.html', veiculos=veiculos)
-
-@app.route('/')
-def login():
-    return render_template('login.html')
 
 if __name__ == '__main__':
     create_table()
