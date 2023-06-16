@@ -58,6 +58,8 @@ def edit_carro(placa):
     if request.method == 'POST':
         # Obter os novos valores dos campos do formulário de edição
         modelo = request.form['modelo']
+        chassi = request.form['chassi']
+        ano = request.form['ano']
         cor = request.form['cor']
         km = request.form['km']
         preco = request.form['preco']
@@ -66,8 +68,8 @@ def edit_carro(placa):
         status = request.form['status']
 
         # Executar a query SQL para atualizar as informações do veículo
-        cursor.execute("UPDATE veiculos SET modelo = ?, cor = ?, km = ?, preco = ?, marca = ?, categoria = ?, status = ? WHERE placa = ?",
-                       (modelo, cor, km, preco, marca, categoria, status, placa))
+        cursor.execute("UPDATE veiculos SET modelo = ?, chassi = ?, ano = ?, cor = ?, km = ?, preco = ?, marca = ?, categoria = ?, status = ? WHERE placa = ?",
+                       (modelo, chassi, ano, cor, km, preco, marca, categoria, status, placa))
         conn.commit()
 
         # Redirecionar para a página de portfólio após a edição

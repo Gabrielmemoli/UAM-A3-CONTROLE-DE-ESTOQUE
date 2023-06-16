@@ -35,12 +35,14 @@
                     <img src="{{ veiculo[8] }}" alt="Imagem do veículo" class="img-fluid">
                     <h5 class="card-title">Placa: {{ veiculo[0] }}</h5>
                     <p class="card-text">Modelo: {{ veiculo[1] }}</p>
-                    <p class="card-text">Cor: {{ veiculo[2] }}</p>
-                    <p class="card-text">KM: {{ veiculo[3] }}</p>
-                    <p class="card-text">Preço: {{ veiculo[4] }}</p>
-                    <p class="card-text">Marca: {{ veiculo[5] }}</p>
-                    <p class="card-text">Categoria: {{ veiculo[6] }}</p>
-                    <p class="card-text">Status: {{ veiculo[7] }}</p>
+                    <p class="card-text">Chassi: {{ veiculo[2] }}</p>
+                    <p class="card-text">Ano: {{ veiculo[3] }}</p>
+                    <p class="card-text">Cor: {{ veiculo[4] }}</p>
+                    <p class="card-text">KM: {{ veiculo[5] }}</p>
+                    <p class="card-text">Preço: {{ veiculo[6] }}</p>
+                    <p class="card-text">Marca: {{ veiculo[7] }}</p>
+                    <p class="card-text">Categoria: {{ veiculo[8] }}</p>
+                    <p class="card-text">Status: {{ veiculo[9] }}</p>
                     <form action="/edit_carro/{{ veiculo[0] }}" method="GET">
                       <button type="submit" class="btn btn-primary">Alterar</button>
                     </form>
