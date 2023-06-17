@@ -19,8 +19,7 @@ def create_table():
         preco REAL,
         marca TEXT,
         categoria TEXT,
-        status TEXT,
-        imagem BLOB
+        status TEXT
     )
     ''')
 
@@ -98,13 +97,12 @@ def cadastro_carros():
         marca = request.form['marca']
         categoria = request.form['categoria']
         status = request.form['status']
-        imagem = request.form['imagem']
 
         # Salvar os dados no banco de dados
         conn = sqlite3.connect('banco.db')
         cursor = conn.cursor()
-        cursor.execute('INSERT INTO veiculos VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
-                       (placa, modelo, chassi, ano, cor, km, preco, marca, categoria, status, imagem))
+        cursor.execute('INSERT INTO veiculos VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+                       (placa, modelo, chassi, ano, cor, km, preco, marca, categoria, status))
         conn.commit()
         conn.close()
 

@@ -56,17 +56,43 @@
         <input type="text" class="form-control" id="preco" name="preco" value="{{ veiculo[6] }}" required>
       </div>
       <div class="form-group">
-        <label for="marca">Marca</label>
-        <input type="text" class="form-control" id="marca" name="marca" value="{{ veiculo[7] }}" required>
-      </div>
-      <div class="form-group">
-        <label for="categoria">Categoria</label>
-        <input type="text" class="form-control" id="categoria" name="categoria" value="{{ veiculo[8] }}" required>
-      </div>
-      <div class="form-group">
-        <label for="status">Status</label>
-        <input type="text" class="form-control" id="status" name="status" value="{{ veiculo[9] }}" required>
-      </div>
+        <label for="marca">Marca:</label>
+        <select class="form-control" id="marca" name="marca" value="{{ veiculo[7] }}" required>
+            <option value="Volkswagen">Volkswagen</option>
+            <option value="Ford">Ford</option>
+            <option value="Chevrolet">Chevrolet</option>
+            <option value="Nissan">Nissan</option>
+            <option value="Kia">Kia</option>
+            <option value="Peugeot">Peugeot</option>
+            <option value="Hyundai">Hyundai</option>
+            <option value="Citroën">Citroën</option>
+            <option value="Honda">Honda</option>
+            <option value="Jeep">Jeep</option>
+        </select>
+        <div class="form-group">
+          <label for="categoria">Categoria:</label>
+          <select class="form-control" id="categoria" name="categoria" value="{{ veiculo[8] }}" required>
+              <option value="Sedã">Sedã</option>
+              <option value="Hatch">Hatch</option>
+              <option value="Picape">Picape</option>
+              <option value="SUV">SUV</option>
+              <option value="Van">Van</option>
+              <option value="Jipe">Jipe</option>
+          </select>
+        <div class="form-group" id="status" name="status" value="{{ veiculo[9] }}" required></div>>
+        <label for="status">Selecione o status:</label><br>
+        <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="statusDisponivel" name="status" class="custom-control-input" value="Disponível" checked>
+            <label class="custom-control-label" for="statusDisponivel">Disponível</label>
+        </div>
+        <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="statusAlugado" name="status" class="custom-control-input" value="Alugado">
+            <label class="custom-control-label" for="statusAlugado">Alugado</label>
+        </div>
+        <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="statusManutencao" name="status" class="custom-control-input" value="Manutenção">
+            <label class="custom-control-label" for="statusManutencao">Manutenção</label>
+        </div>
       <button type="submit" class="btn btn-primary">Salvar Alterações</button>
     </form>
   </div>
