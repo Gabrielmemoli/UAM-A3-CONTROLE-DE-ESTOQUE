@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Veículos</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Lista de Veículos</h1>
+
+        {% for veiculo in veiculos %}
+        <div class="card mt-4">
+            <div class="card-body">
+                <h5 class="card-title">Placa: {{ veiculo[0] }}</h5>
+                <p class="card-text">Modelo: {{ veiculo[1] }}</p>
+                <p class="card-text">Cor: {{ veiculo[2] }}</p>
+                <p class="card-text">KM: {{ veiculo[3] }}</p>
+                <p class="card-text">Preço: {{ veiculo[4] }}</p>
+                <p class="card-text">Marca: {{ veiculo[5] }}</p>
+                <p class="card-text">Categoria: {{ veiculo[6] }}</p>
+                <p class="card-text">Status: {{ veiculo[7] }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

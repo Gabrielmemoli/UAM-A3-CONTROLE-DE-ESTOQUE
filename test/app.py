@@ -6,7 +6,7 @@ app.secret_key = 'mysecretkey'
 
 # Função para criar a tabela 'users' no banco de dados
 def create_table():
-    conn = sqlite3.connect('website/banco.db')
+    conn = sqlite3.connect('test/test.db')
     cursor = conn.cursor()
     cursor.execute('''
     CREATE TABLE IF NOT EXISTS veiculos (
@@ -36,7 +36,7 @@ def create_table():
 
 @app.route('/portfolio/<placa>', methods=['POST'])
 def excluir_carro(placa):
-    conn = sqlite3.connect("website/banco.db")
+    conn = sqlite3.connect("test/test.db")
     cursor = conn.cursor()
 
     # Executa a query SQL para excluir o carro com a placa fornecida
@@ -51,7 +51,7 @@ def excluir_carro(placa):
 
 @app.route('/edit_carro/<placa>', methods=['GET', 'POST'])
 def edit_carro(placa):
-    conn = sqlite3.connect("website/banco.db")
+    conn = sqlite3.connect("test/test.db")
     cursor = conn.cursor()
 
     if request.method == 'POST':
@@ -99,7 +99,7 @@ def cadastro_carros():
         status = request.form['status']
 
         # Salvar os dados no banco de dados
-        conn = sqlite3.connect("website/banco.db")
+        conn = sqlite3.connect("test/test.db")
         cursor = conn.cursor()
         cursor.execute('INSERT INTO veiculos VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
                        (placa, modelo, chassi, ano, cor, km, preco, marca, categoria, status))
@@ -115,7 +115,7 @@ def cadastro_carros():
 
 @app.route('/portfolio')
 def portfolio():
-    conn = sqlite3.connect("website/banco.db")
+    conn = sqlite3.connect("test/test.db")
     cursor = conn.cursor()
 
     # Selecionar todos os veículos do banco de dados
@@ -131,7 +131,7 @@ def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        conn = sqlite3.connect("website/banco.db")
+        conn = sqlite3.connect("test/test.db")
         cursor = conn.cursor()
         cursor.execute("SELECT * FROM users WHERE username=? AND password=?", (username, password))
         user = cursor.fetchone()
@@ -151,7 +151,7 @@ def register():
         password = request.form['password']
 
         # Salvar os dados no banco de dados
-        conn = sqlite3.connect("website/banco.db")
+        conn = sqlite3.connect("test/test.db")
         cursor = conn.cursor()
         cursor.execute("INSERT INTO users (username, password) VALUES (?, ?)", (username, password))
         conn.commit()
