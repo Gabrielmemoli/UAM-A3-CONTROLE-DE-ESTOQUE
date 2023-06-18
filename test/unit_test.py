@@ -68,6 +68,37 @@ class FlaskAppTests(unittest.TestCase):
         self.assertEqual(result[8], 'Compacto')
         self.assertEqual(result[9], 'Alugado')
 
+    def test_cadastro_carros(self):
+        # Envia uma requisição POST para cadastrar um novo carro
+        data = {
+            'placa': 'FBC123',
+            'modelo': 'City',
+            'chassi': '444456',
+            'ano': 2022,
+            'cor': 'Preto',
+            'km': 10000,
+            'preco': 300.00,
+            'marca': 'Honda',
+            'categoria': 'Sedan',
+            'status': 'Disponível'
+        }
+        response = self.app.post('/cadastro_carros', data=data)
+        self.assertEqual(response.status_code, 302)
+
+        # Checa se o carro foi adicionado ao banco de dados
+        self.cursor.execute("SELECT * FROM veiculos WHERE placa = 'FBC123'")
+        result = self.cursor.fetchone()
+        self.assertIsNotNone(result)
+        self.assertEqual(result[1], 'City')
+        self.assertEqual(result[2], '444456')
+        self.assertEqual(result[3], 2022)
+        self.assertEqual(result[4], 'Preto')
+        self.assertEqual(result[5], 10000)
+        self.assertEqual(result[6], 300.00)
+        self.assertEqual(result[7], 'Honda')
+        self.assertEqual(result[8], 'Sedan')
+        self.assertEqual(result[9], 'Disponível')
+
 
 if __name__ == '__main__':
     unittest.main()
