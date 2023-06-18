@@ -127,6 +127,24 @@ class FlaskAppTests(unittest.TestCase):
         self.assertEqual(response.status_code, 302)
         self.assertEqual(response.location, '/portfolio')
 
+    def test_register(self):
+        # Envia uma requisição POST para cadastrar um novo usuário
+        data = {
+            'username': 'newuser',
+            'password': 'newpassword'
+        }
+        response = self.app.post('/register', data=data)
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.location, '/')
+
+        # Checa se o usuário foi adicionado ao banco de dados
+        self.cursor.execute("SELECT * FROM users WHERE username = 'newuser'")
+        result = self.cursor.fetchone()
+        self.assertIsNotNone(result)
+        self.assertEqual(result[0], 'newuser')
+        self.assertEqual(result[1], 'newpassword')
+
+
 
 if __name__ == '__main__':
     unittest.main()
