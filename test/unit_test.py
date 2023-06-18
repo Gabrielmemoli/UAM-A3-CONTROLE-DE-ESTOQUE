@@ -99,6 +99,20 @@ class FlaskAppTests(unittest.TestCase):
         self.assertEqual(result[8], 'Sedan')
         self.assertEqual(result[9], 'Disponível')
 
+    def test_portfolio(self):
+        # Insere carros teste no banco de dados
+        self.cursor.execute("INSERT INTO veiculos VALUES ('ARC123', 'Golf', '223456', 2022, 'Cinza', 10000, 150.00, 'Volkswagen', 'Hatch', 'Manutenção')")
+        self.cursor.execute("INSERT INTO veiculos VALUES ('DRY456', 'Gol', '664321', 2015, 'Branco', 20000, 100.00, 'Volkswagen', 'Hatch', 'Alugado')")
+        self.conn.commit()
+
+        # Envia uma requisição GET para a página de portfólio
+        response = self.app.get('/portfolio')
+        self.assertEqual(response.status_code, 200)
+
+        # Checa se os carros foram renderizados na página
+        self.assertIn(b'ARC123', response.data)
+        self.assertIn(b'DRY456', response.data)
+
 
 if __name__ == '__main__':
     unittest.main()
