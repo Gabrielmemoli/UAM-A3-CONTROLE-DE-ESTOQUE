@@ -113,6 +113,20 @@ class FlaskAppTests(unittest.TestCase):
         self.assertIn(b'ARC123', response.data)
         self.assertIn(b'DRY456', response.data)
 
+    def test_login(self):
+        # Insere um usuário teste no banco de dados
+        self.cursor.execute("INSERT INTO users VALUES ('testuser', 'password')")
+        self.conn.commit()
+
+        # Envia uma requisição POST para fazer login
+        data = {
+            'username': 'testuser',
+            'password': 'password'
+        }
+        response = self.app.post('/', data=data)
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.location, '/portfolio')
+
 
 if __name__ == '__main__':
     unittest.main()
