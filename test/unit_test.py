@@ -34,7 +34,39 @@ class FlaskAppTests(unittest.TestCase):
         result = self.cursor.fetchone()
         self.assertIsNone(result)
 
-    
+    def test_edit_carro(self):
+        # Insere um carro de teste no banco de dados
+        self.cursor.execute("INSERT INTO veiculos VALUES ('ABC123', 'Celta', '123456', 2022, 'Roxo', 10000, 150.00, 'Chevrolet', 'Compacto', 'Disponível')")
+        self.conn.commit()
+
+        # Envia uma requisição POST para editar o carro
+        data = {
+            'modelo': 'Corsa',
+            'chassi': '654321',
+            'ano': 2023,
+            'cor': 'Vermelho',
+            'km': 20000,
+            'preco': 200.00,
+            'marca': 'Chevrolet',
+            'categoria': 'Compacto',
+            'status': 'Alugado'
+        }
+        response = self.app.post('/edit_carro/ABC123', data=data)
+        self.assertEqual(response.status_code, 302)
+
+        # Checa se o carro foi editado no banco de dados
+        self.cursor.execute("SELECT * FROM veiculos WHERE placa = 'ABC123'")
+        result = self.cursor.fetchone()
+        self.assertIsNotNone(result)
+        self.assertEqual(result[1], 'Corsa')
+        self.assertEqual(result[2], '654321')
+        self.assertEqual(result[3], 2023)
+        self.assertEqual(result[4], 'Vermelho')
+        self.assertEqual(result[5], 20000)
+        self.assertEqual(result[6], 200.00)
+        self.assertEqual(result[7], 'Chevrolet')
+        self.assertEqual(result[8], 'Compacto')
+        self.assertEqual(result[9], 'Alugado')
 
 
 if __name__ == '__main__':
