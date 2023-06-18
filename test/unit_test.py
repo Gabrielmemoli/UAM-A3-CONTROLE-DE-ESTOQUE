@@ -144,6 +144,10 @@ class FlaskAppTests(unittest.TestCase):
         self.assertEqual(result[0], 'newuser')
         self.assertEqual(result[1], 'newpassword')
 
+    def test_exibir_portfolio(self):
+        # Send a GET request to the portfolio page
+        response = self.app.get('/portfolio')
+        self.assertEqual(response.status_code, 200)
 
 
 if __name__ == '__main__':
